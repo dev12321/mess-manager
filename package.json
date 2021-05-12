@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "windows": "react-native run-windows",
     "clean": "cd android && gradlew clean && cd .. && react-native run-android",
-    "reset": "rm yarn.lock && rm -rf node_modules && yarn"
+    "reset": "rm yarn.lock && rm -rf node_modules && yarn",
+    "release:android": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@react-native-community/checkbox": "^0.5.7",
