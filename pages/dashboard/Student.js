@@ -12,6 +12,8 @@ import {
 import {FirebaseContext} from '../../App';
 import firestore from '@react-native-firebase/firestore';
 import {Formik} from 'formik';
+import AntDesignIcons from 'react-native-vector-icons/AntDesign';
+import auth from '@react-native-firebase/auth';
 function StudentDashboard() {
   const user = useContext(FirebaseContext);
   const [loading, setLoading] = useState(false);
@@ -42,8 +44,17 @@ function StudentDashboard() {
   }, []);
   return (
     <View style={{padding: 10, height: '100%'}}>
-      <Text style={{fontSize: 24}}>Welcome,</Text>
-      <Text style={{fontSize: 24}}>{user.name}</Text>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View>
+          <Text style={{fontSize: 24}}>Welcome,</Text>
+          <Text style={{fontSize: 24}}>{user.name}</Text>
+        </View>
+        <View>
+          <TouchableOpacity onPress={() => auth().signOut()}>
+            <AntDesignIcons name="logout" size={24} />
+          </TouchableOpacity>
+        </View>
+      </View>
       <Text style={{fontSize: 16, marginVertical: 30}}>
         {pref
           ? `Your meal preference for ${formatISO(addDays(new Date(), 1), {

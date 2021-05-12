@@ -1,10 +1,12 @@
 import firestore from '@react-native-firebase/firestore';
 import React, {useContext, useEffect, useState} from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import {FirebaseContext} from '../../App';
 import {FlatListItemSeparator} from '../../component';
 import AddHostel from './AddHostelModal';
+import AntDesignIcons from 'react-native-vector-icons/AntDesign';
+import auth from '@react-native-firebase/auth';
 function SuperAdminDashboard() {
   const user = useContext(FirebaseContext);
   const [hostels, setHostels] = useState([]);
@@ -41,8 +43,17 @@ function SuperAdminDashboard() {
   }, []);
   return (
     <View style={{padding: 20, flex: 1}}>
-      <Text style={{fontSize: 24}}>Welcome,</Text>
-      <Text style={{fontSize: 24}}>{user.name}</Text>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View>
+          <Text style={{fontSize: 24}}>Welcome,</Text>
+          <Text style={{fontSize: 24}}>{user.name}</Text>
+        </View>
+        <View>
+          <TouchableOpacity onPress={() => auth().signOut()}>
+            <AntDesignIcons name="logout" size={24} />
+          </TouchableOpacity>
+        </View>
+      </View>
 
       <View style={{flexGrow: 1, marginTop: 20}}>
         <FlatList

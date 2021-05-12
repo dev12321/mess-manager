@@ -1,11 +1,13 @@
 import React, {useContext, useEffect, useMemo, useState} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {FirebaseContext} from '../../App';
 import RNPickerSelect from 'react-native-picker-select';
 import {addDays, formatISO} from 'date-fns';
 import firestore from '@react-native-firebase/firestore';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
+import AntDesignIcons from 'react-native-vector-icons/AntDesign';
+import auth from '@react-native-firebase/auth';
 function ManagerDashboard() {
   const user = useContext(FirebaseContext);
   const [date, setDate] = useState();
@@ -80,8 +82,17 @@ function ManagerDashboard() {
   console.log('dates', dates);
   return (
     <View style={{padding: 20}}>
-      <Text style={{fontSize: 24}}>Welcome,</Text>
-      <Text style={{fontSize: 24}}>{user.name}</Text>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View>
+          <Text style={{fontSize: 24}}>Welcome,</Text>
+          <Text style={{fontSize: 24}}>{user.name}</Text>
+        </View>
+        <View>
+          <TouchableOpacity onPress={() => auth().signOut()}>
+            <AntDesignIcons name="logout" size={24} />
+          </TouchableOpacity>
+        </View>
+      </View>
       <View style={{marginTop: 20}}>
         <Text>Select Date:</Text>
         <RNPickerSelect

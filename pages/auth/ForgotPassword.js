@@ -42,7 +42,7 @@ const ForgotPassword = props => {
           <View style={styles.main}>
             <Image
               style={styles.image}
-              source={require('./../assets/meal.png')}
+              source={require('./../../assets/meal.png')}
             />
             <Formik
               initialValues={{email: ''}}
